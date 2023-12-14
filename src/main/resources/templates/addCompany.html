@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+		<!-- header -->
+	<span th:replace="layout/head :: headLayout"></span>
+	<body>
+		<!-- navbar -->
+		<span th:replace="layout/menu :: menuJacaranda"></span>
+		
+		<div class="container">
+			<h1>Añadir compañia</h1>
+			<form th:action="@{addCompany}" th:object="${company}">
+				<label>Nombre</label> 
+				<input type="text" th:field="*{name}" class="form-control">
+				<label>dirección</label> 
+				<input type="text" th:field="*{address}" class="form-control">
+				<label>ciudad</label> 
+				<input type="text" th:field="*{city}" class="form-control">
+				<button type="submit" class="btn btn-primary">Añadir Compañia</button>
+			</form>
+		</div>
+		
+		<!-- footer -->
+		<span th:replace="layout/footer :: pie"></span>
+	</body>
+</html>

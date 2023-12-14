@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	
-</body>
+	<!-- header -->
+	<span th:replace="layout/head :: headLayout"></span>
+	<body>
+		
+		<!-- navbar -->
+		<span th:replace="layout/menu :: menuJacaranda"></span>
+		
+		<div class="container">
+			<a href="/formAddCompany" class="btn btn-primary">Añadir Compañia</a>
+		
+			<h1>Lista de compañias</h1>
+			
+			<!-- tabla que muestra todas las compañias -->
+			<table class="table">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Dirección</th>
+			      <th scope="col">Ciudad</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="company :${companies}">
+			    <td th:text="${company.id}"></td>
+			      <td th:text="${company.name}"></td>
+			      <td th:text="${company.address}"></td>
+			      <td th:text="${company.city}"></td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+		</div>
+		
+		<!-- footer -->
+		<span th:replace="layout/footer :: pie"></span>
+	</body>
 </html>

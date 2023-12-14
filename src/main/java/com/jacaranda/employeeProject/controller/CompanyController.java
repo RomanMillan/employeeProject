@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.jacaranda.employeeProject.model.Company;
 import com.jacaranda.employeeProject.service.CompanyService;
@@ -17,7 +18,22 @@ public class CompanyController {
 	
 	@GetMapping("/listCompanies")
 	public String listCompanies (Model model) {
-		List<Company> listCompanies = companyService.getCompanies();
-		model.addAttribute("listCompanies", listCompanies);
+		List<Company> companies = companyService.getCompanies();
+		model.addAttribute("companies", companies);
+		return "listCompanies";
+	}
+	
+//	agregar una compañia
+	@GetMapping("/formAddCompany")
+	public String addCompany(Model model) {
+		model.addAttribute("company", new Company());
+		return "addCompany";
+	}
+	
+	@GetMapping("/addCompany")
+	public String calculate(Model model, @ModelAttribute("company") Company company) {
+		Company c = companyService.addCompany(company);
+		System.out.print(c.getName());
+		return "addCompany";
 	}
 }
