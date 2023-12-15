@@ -28,6 +28,9 @@
 			      <td th:text="${company.name}"></td>
 			      <td th:text="${company.address}"></td>
 			      <td th:text="${company.city}"></td>
+			      <td>
+					  <a th:href="'/formUpdateCompany/' + ${company.id}">Editar</a>
+				  </td>
 			    </tr>
 			  </tbody>
 			</table>

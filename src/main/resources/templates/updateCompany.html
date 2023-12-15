@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<!-- header -->
+	<span th:replace="layout/head :: headLayout"></span>
+	<body>
+	
+		<!-- navbar -->
+		<span th:replace="layout/menu :: menuJacaranda"></span>	
+				
+		<div class="container">
+			<h1>Actualizar compañia</h1>
+			
+			<form th:action="@{/updateCompany}" th:object="${companyUpdate}">
+				<input id="id" name="id" type="text" th:field="*{id}" th:value="*{id}" hidden readonly> 
+				<label>Nombre</label> 	
+				<input id="name" name="name" type="text" th:field="*{name}"  th:value="*{name}"class="form-control">
+				<label>dirección</label> 
+				<input  id="address" name="address"type="text" th:field="*{address}" th:value="*{address}" class="form-control">
+				<label>ciudad</label> 
+				<input  id="city" name="city" type="text" th:field="*{city}"  th:value="*{city}" class="form-control">
+				<button type="submit" class="btn btn-warning">Actualizar</button>
+			</form>
+		
+		</div>
+		
+		<!-- footer -->
+		<span th:replace="layout/footer :: pie"></span>
+	</body>
+</html>
