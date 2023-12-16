@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<!-- header -->
+	<span th:replace="~{layout/head :: headLayout}"></span>
+	<body>
+		
+		<!-- navbar -->
+		<span th:replace="~{layout/menu :: menuJacaranda}"></span>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h1>Lista de empleados</h1>
+				</div>
+				<div class="col">
+					<a href="/employee/formAdd" class="btn btn-primary">Añadir Empleado</a>
+				</div>
+			</div>
+			
+			<!-- tabla que muestra todas las compañias -->
+			<table class="table">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Apellidos</th>
+			      <th scope="col">Correo</th>
+			      <th scope="col">Sexo</th>
+			      <th scope="col">Nacimiento</th>
+			      <th scope="col">Compañia</th>
+			      <th scope="col">Editar</th>
+			      <th scope="col">Borrar</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="employee :${employees}">
+			    	<td th:text="${employee.id}"></td>
+			      	<td th:text="${employee.firstName}"></td>
+			      	<td th:text="${employee.lastName}"></td>
+			      	<td th:text="${employee.email}"></td>
+			      	<td th:text="${employee.gender}"></td>
+			      	<td th:text="${employee.dateOfBirth}"></td>
+			      	<td th:text="${employee.company.name}"></td>
+			      	<td>
+					  	<a th:href="'/employee/formUpdate/' + ${employee.id}" class="btn btn-warning">Editar</a>
+				  	</td>
+				  	<td>
+					  	<a th:href="'/employee/formDelete/' + ${employee.id}" class="btn btn-danger">Borrar</a>
+				  	</td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+		</div>
+		
+		<!-- footer -->
+		<span th:replace="~{layout/footer :: pie}"></span>
+	</body>
+</html>

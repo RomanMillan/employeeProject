@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<!-- header -->
+	<span th:replace="~{layout/head :: headLayout}"></span>
+	<body>
+		<!-- navbar -->
+		<span th:replace="~{layout/menu :: menuJacaranda}"></span>
+		
+		<div class="container">
+			<h1>Borrar empleado</h1>
+			
+			<!-- Mensaje de que ha sido actualizado -->
+			<div th:if="${updated}" class="alert alert-success" role="alert">		
+				<span th:text="${updated}"></span>
+			</div>	
+			
+				
+			<form th:action="@{/employee/delete}" th:object="${employee}">
+				<input th:field="*{id}" hidden>
+				<label>Nombre</label>
+				<input type="text" th:field="*{firstName}" class="form-control">
+				<label>Apellidos</label>
+				<input type="text" th:field="*{lastName}" class="form-control">
+				<label>Correo</label>
+				<input type="text" th:field="*{email}" class="form-control"> 
+				<label>Sexo</label>
+				<select th:field="*{gender}" class="form-select">
+					<option th:value="Male">Masculino</option>
+					<option th:value="Female">Femenino</option>
+				</select>
+				<label>Nacimiento</label>
+				<input type="date" th:field="*{dateOfBirth}" class="form-control">
+				<label>Nombre</label>
+				<label>Compañia</label>
+				<select th:field="*{company}" class="form-select">
+					<option th:each="company: ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+				</select>
+				<label>contraseña</label>
+				<input type="text" th:field="*{password}" class="form-control">
+				<button type="submit" class="btn btn-danger">Borrar</button>
+			</form>
+		</div>
+		
+		<!-- footer -->
+		<span th:replace="~{layout/footer :: pie}"></span>
+	</body>
+</html>
