@@ -1,14 +1,17 @@
 package com.jacaranda.employeeProject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.employeeProject.model.Company;
 import com.jacaranda.employeeProject.model.Employee;
@@ -26,8 +29,15 @@ public class EmployeeController {
 	
 //	muestra todos los empleados
 	@GetMapping("/list")
-	public String listEmployees(Model model) {
-		List<Employee> employees = employeeService.getEmployees();
+	public String listEmployees(Model model, 
+			@RequestParam Optional<Integer> numPage, 
+			@RequestParam Optional<Integer> pageSize 
+			) {
+		Page<Employee> employees = employeeService.getEmployees(numPage.orElse(1),pageSize.orElse(10));
+		model.addAttribute("currentPage",numPage.orElse(1));
+		model.addAttribute("totalPages",employees.getTotalPages());
+		model.addAttribute("totalItems",employees.getTotalElements());
+		model.addAttribute("listElement", employees.getContent());
 		model.addAttribute("employees", employees);
 		return "listEmployee";
 	}
