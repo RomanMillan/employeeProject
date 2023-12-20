@@ -31,9 +31,11 @@ public class EmployeeController {
 	@GetMapping("/list")
 	public String listEmployees(Model model, 
 			@RequestParam Optional<Integer> numPage, 
-			@RequestParam Optional<Integer> pageSize 
+			@RequestParam Optional<Integer> pageSize,
+			@RequestParam Optional<String> sortName 
 			) {
-		Page<Employee> employees = employeeService.getEmployees(numPage.orElse(1),pageSize.orElse(10));
+		Page<Employee> employees = employeeService.getEmployees(numPage.orElse(1),pageSize.orElse(10),
+				sortName.orElse("firstName"));
 		model.addAttribute("currentPage",numPage.orElse(1));
 		model.addAttribute("totalPages",employees.getTotalPages());
 		model.addAttribute("totalItems",employees.getTotalElements());
